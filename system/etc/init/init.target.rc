@@ -1,0 +1,225 @@
+# for ITO testing ----add by lw
+service chmodtpon /system/bin/chmodtp o 1
+    user root
+    oneshot
+    disabled
+    seclabel u:r:chmodtp:s0
+on property:sys.chmodtp=1
+    start chmodtpon
+
+service chmodtpoff /system/bin/chmodtp f 1
+    user root
+    oneshot
+    disabled
+    seclabel u:r:chmodtp:s0
+on property:sys.chmodtp=2
+    start chmodtpoff
+
+service chmodtp3on /system/bin/chmodtp o 3
+    user root
+    oneshot
+    disabled
+
+on property:sys.chmodtp3=1
+    start chmodtp3on
+
+service chmodtp3off /system/bin/chmodtp f 3
+    user root
+    oneshot
+    disabled
+
+on property:sys.chmodtp3=2
+    start chmodtp3off
+
+service whiteflashon /system/bin/factory_bin w 1
+    user root
+    oneshot
+    disabled
+
+on property:sys.whiteflashon=1
+    start whiteflashon
+
+service whiteflashoff /system/bin/factory_bin w 0
+    user root
+    oneshot
+    disabled
+
+on property:sys.whiteflashoff=1
+    start whiteflashoff
+
+service yellowflashon /system/bin/factory_bin y 1
+    user root
+    oneshot
+    disabled
+
+on property:sys.yellowflashon=1
+    start yellowflashon
+
+service yellowflashoff /system/bin/factory_bin y 0
+    user root
+    oneshot
+    disabled
+
+on property:sys.yellowflashoff=1
+    start yellowflashoff
+
+service chargingenable /system/bin/factory_bin c 1
+    user root
+    oneshot
+    disabled
+
+on property:sys.charging.enable=1
+    start chargingenable
+
+service chargingdisable /system/bin/factory_bin c 0
+    user root
+    oneshot
+    disabled
+
+on property:sys.charging.disable=1
+    start chargingdisable
+
+service keylighton /system/bin/factory_bin k 1
+    user root
+    oneshot
+    disabled
+on property:sys.keylighton=1
+    start keylighton
+
+service keylightoff /system/bin/factory_bin k 0
+    user root
+    oneshot
+    disabled
+on property:sys.keylightoff=1
+    start keylightoff
+
+service redledon /system/bin/factory_bin r 1
+    user root
+    oneshot
+    disabled
+on property:sys.redledon=1
+    start redledon
+
+service redledoff /system/bin/factory_bin r 0
+    user root
+    oneshot
+    disabled
+on property:sys.redledoff=1
+    start redledoff
+
+service greenledon /system/bin/factory_bin g 1
+    user root
+    oneshot
+    disabled
+on property:sys.greenledon=1
+    start greenledon
+
+service greenledoff /system/bin/factory_bin g 0
+    user root
+    oneshot
+    disabled
+on property:sys.greenledoff=1
+    start greenledoff
+
+service blueledon /system/bin/factory_bin b 1
+    user root
+    oneshot
+    disabled
+on property:sys.blueledon=1
+    start blueledon
+
+service blueledoff /system/bin/factory_bin b 0
+    user root
+    oneshot
+    disabled
+on property:sys.blueledoff=1
+    start blueledoff
+
+service smartpaon /system/bin/factory_bin s 1
+    user root
+    oneshot
+    disabled
+on property:sys.smartpaon=1
+    start smartpaon
+
+service smartpaoff /system/bin/factory_bin s 0
+    user root
+    oneshot
+    disabled
+on property:sys.smartpaoff=1
+    start smartpaoff
+
+# for factory current test --begin
+service screentimeout /system/bin/sh /system/etc/init.qcom.screentimeout.sh
+    class main
+    user root
+    oneshot
+    seclabel u:r:shell:s0
+on property:sys.screentimeout=1
+    start screentimeout
+on property:sys.screentimeout=0
+    stop screentimeout
+# for factory current test --end
+
+#smartpa test for E7 --begin
+service spcali /system/bin/sh system/bin/sp_cali.sh
+    class main
+    user root
+    oneshot
+    disabled
+on property:sys.spcali.sp=1
+    start spcali
+
+service sptest /system/bin/sh system/bin/sp_test.sh
+    class main
+    user root
+    oneshot
+    disabled
+on property:sys.sptest.sp=1
+    start sptest
+#smartpa test for E7 --end
+# add end
+
+#factory boot
+service gethqfactorymode /system/bin/gethqfactorymode
+   class core
+   oneshot
+
+#getsn_xiaomi
+service getxiaomisn /system/bin/getsn_xiaomi
+    class core
+    oneshot
+    seclabel u:r:getsn_xiaomi:s0
+
+#getcolorid
+service getcolorid /system/bin/getcolorid
+    class core
+    oneshot
+
+service cloversptestd9 /system/bin/sptest_d9.sh
+    class main
+    user root
+    oneshot
+    disabled
+on property:sys.clover.sp=1
+    start cloversptestd9
+
+service cloversptestd9p /system/bin/sptest_d9p.sh
+    class main
+    user root
+    oneshot
+    disabled
+on property:sys.clover.sp=2
+    start cloversptestd9p
+
+service scancode /system/bin/factory_bin qr prop
+    class main
+    user root
+    oneshot
+
+on property:persist.audio.chk.cal.spk=1
+    setprop audio.chk.cal.spk 1
+
+on property:persist.audio.chk.cal.spk=2
+    setprop audio.chk.cal.spk 2
+

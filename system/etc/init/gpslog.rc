@@ -1,0 +1,14 @@
+
+service diag_gplog_start /system/vendor/bin/diag_mdlog -f /vendor/etc/GNSS.cfg -o /sdcard/gps_logs/
+    class late_start
+    user shell
+    group system oem_2901 diag sdcard_rw sdcard_r media_rw
+    disabled
+    oneshot
+
+service diag_gplog_stop /system/vendor/bin/diag_mdlog -k
+    class late_start
+    user shell
+    group system oem_2901 diag sdcard_rw sdcard_r media_rw
+    disabled
+    oneshot

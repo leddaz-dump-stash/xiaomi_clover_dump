@@ -1,0 +1,179 @@
+#Copyright (c) 2015-2016 Qualcomm Technologies, Inc.
+#All Rights Reserved.
+#Confidential and Proprietary - Qualcomm Technologies, Inc.
+#tc num:
+#[INPUT]  main-mic:1   sub-mic:3  headset-mic:5
+#[OUTPUT] receiver:2   speaker:4  headphones:6
+#AFE loopback: [INPUT] [OUTPUT] 7
+#codec loopback:[INPUT] [OUTPUT] 8
+#extern loopback£º[INPUT] [OUTPUT] 9
+#record£º[INPUT] [INPUT] [INPUT]
+#playback:[OUTPUT] [OUTPUT] [OUTPUT]
+
+
+tc 444
+#Speaker Device
+!Playback
+Rxdevice:0
+
+enable
+PRI_MI2S_RX Audio Mixer MultiMedia1:1
+
+disable
+PRI_MI2S_RX Audio Mixer MultiMedia1:0
+
+tc 147
+#Main-mic to Speakers AFE loopback
+!AfeLoop
+Txdevice:11
+Rxdevice:35
+
+enable
+DEC1 MUX:ADC1
+ADC1_INP1 Switch:1
+IIR1 INP1 MUX:DEC1
+DEC1 Volume:64
+PRI_MI2S_RX Port Mixer INT3_MI2S_TX:1
+
+disable
+DEC1 MUX:ZERO
+ADC1_INP1 Switch:0
+IIR1 INP1 MUX:ZERO
+DEC1 Volume:84
+PRI_MI2S_RX Port Mixer INT3_MI2S_TX:0
+
+tc 167
+# Main-mic to Headset Speakers AFE loopback
+!AfeLoop
+Txdevice:11
+Rxdevice:38
+
+enable
+RX1 MIX1 INP1:IIR1
+RX2 MIX1 INP1:IIR2
+RDAC2 MUX:RX2
+RX HPH Mode:HD2
+HPHL:Switch
+HPHR:Switch
+INT0_MI2S_RX Channels:Two
+DEC1 MUX:ADC1
+ADC1_INP1 Switch:1
+IIR1 INP1 MUX:DEC1
+DEC1 Volume:64
+INT0_MI2S_RX Port Mixer INT3_MI2S_TX:1
+
+disable
+RX1 MIX1 INP1:ZERO
+RX2 MIX1 INP1:ZERO
+RDAC2 MUX:ZERO
+RX HPH Mode:NORMAL
+HPHL:ZERO
+HPHR:ZERO
+INT0_MI2S_RX Channels:One
+DEC1 MUX:ZERO
+ADC1_INP1 Switch:0
+IIR1 INP1 MUX:ZERO
+DEC1 Volume:84
+INT0_MI2S_RX Port Mixer INT3_MI2S_TX:0
+
+tc 347
+# Sub-mic to Speakers AFE loopback
+!AfeLoop
+Txdevice:11
+Rxdevice:35
+
+enable
+DEC1 MUX:ADC2
+ADC2 MUX:INP3
+IIR1 INP1 MUX:DEC1
+PRI_MI2S_RX Port Mixer INT3_MI2S_TX:1
+
+disable
+DEC1 MUX:ZERO
+ADC2 MUX:ZERO
+IIR1 INP1 MUX:ZERO
+PRI_MI2S_RX Port Mixer INT3_MI2S_TX:0
+
+tc 367
+#Sub-Mic to Headset Speakers AFE loopback
+!AfeLoop
+Txdevice:11
+Rxdevice:38
+
+enable
+DEC1 MUX:ADC2
+ADC2 MUX:INP3
+IIR1 INP1 MUX:DEC1
+RX1 MIX1 INP1:IIR1
+RX2 MIX1 INP1:IIR2
+RDAC2 MUX:RX2
+RX HPH Mode:HD2
+HPHL:Switch
+HPHR:Switch
+INT0_MI2S_RX Channels:Two
+INT0_MI2S_RX Port Mixer INT3_MI2S_TX:1
+
+disable
+DEC1 MUX:ZERO
+ADC2 MUX:ZERO
+IIR1 INP1 MUX:ZERO
+RX1 MIX1 INP1:ZERO
+RX2 MIX1 INP1:ZERO
+RDAC2 MUX:ZERO
+RX HPH Mode:NORMAL
+HPHL:ZERO
+HPHR:ZERO
+INT0_MI2S_RX Channels:One
+INT0_MI2S_RX Port Mixer INT3_MI2S_TX:0
+
+tc 547
+# HeadSet Mic to Speakers AFE loopback
+!AfeLoop
+Txdevice:11
+Rxdevice:35
+
+enable
+DEC1 MUX:ADC2
+ADC2 MUX:INP2
+IIR1 INP1 MUX:DEC1
+PRI_MI2S_RX Port Mixer INT3_MI2S_TX:1
+
+disable
+DEC1 MUX:ZERO
+ADC2 MUX:ZERO
+IIR1 INP1 MUX:ZERO
+PRI_MI2S_RX Port Mixer INT3_MI2S_TX:0
+
+tc 567
+#HeadSet Mic to Headset Speakers AFE loopback
+!AfeLoop
+Txdevice:11
+Rxdevice:38
+
+enable
+DEC1 MUX:ADC2
+ADC2 MUX:INP2
+IIR1 INP1 MUX:DEC1
+IIR2 INP1 MUX:DEC1
+RX1 MIX1 INP1:IIR1
+RX2 MIX1 INP1:IIR2
+RDAC2 MUX:RX2
+RX HPH Mode:HD2
+HPHL:Switch
+HPHR:Switch
+INT0_MI2S_RX Channels:Two
+INT0_MI2S_RX Port Mixer INT3_MI2S_TX:1
+
+disable
+DEC1 MUX:ZERO
+ADC2 MUX:ZERO
+IIR1 INP1 MUX:ZERO
+RX1 MIX1 INP1:ZERO
+RX2 MIX1 INP1:ZERO
+RDAC2 MUX:ZERO
+RX HPH Mode:NORMAL
+HPHL:ZERO
+HPHR:ZERO
+INT0_MI2S_RX Channels:One
+INT0_MI2S_RX Port Mixer INT3_MI2S_TX:0
+

@@ -1,0 +1,14 @@
+# clover-user 8.1.0 OPM1.171019.019 V10.3.2.0.ODJCNXM release-keys
+- manufacturer: xiaomi
+- platform: sdm660
+- codename: clover
+- flavor: clover-user
+- release: 8.1.0
+- id: OPM1.171019.019
+- incremental: V10.3.2.0.ODJCNXM
+- tags: release-keys
+- fingerprint: Xiaomi/clover/clover:8.1.0/OPM1.171019.019/V10.3.2.0.ODJCNXM:user/release-keys
+- is_ab: false
+- brand: Xiaomi
+- branch: clover-user-8.1.0-OPM1.171019.019-V10.3.2.0.ODJCNXM-release-keys
+- repo: xiaomi_clover_dump

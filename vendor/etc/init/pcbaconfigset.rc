@@ -1,0 +1,5 @@
+
+# add PcbaConfigSet
+service PcbaConfigSet /system/vendor/bin/PcbaConfigSet
+    class core
+    oneshot

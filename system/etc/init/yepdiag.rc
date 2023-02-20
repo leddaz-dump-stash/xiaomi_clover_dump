@@ -1,0 +1,20 @@
+#
+# file create by yujinwang 20171016
+# 
+#
+
+#
+#diag  (start)
+#
+#add by yujinwang for write and read flags begin
+service hwdiag /system/bin/hwdiag
+    class core
+    user root
+    seclabel u:r:hwdiag:s0
+    
+#add by yujinwang for write and read flags end
+
+#
+#diag  (end)
+#
+
